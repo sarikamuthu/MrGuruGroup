@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+</style>
+
+<div class="ss-form-container">
+<div class="ss-top-of-page">
+<div class="ss-form-heading">
+<h1 class="ss-form-title" dir="ltr">Test</h1>
+<div class="ss-form-desc ss-no-ignore-whitespace" dir="ltr">WELD DATE 
+00</div>
+<div class="ss-required-asterisk" aria-hidden="true" id="Required">* 
+Required</div></div></div><br>
+
+<form name="submit-to-google-sheet" id="form" action="http://example.com" 
+target="_top" onsubmit="myFunction()">
+
+<input name="TEXT" type="text" placeholder="text" required>
+
+<input name="email" type="email" placeholder="Email" required>
+
+<div class="ss-q-title">JOINT
+<span class="ss-required-asterisk" aria-hidden="true">*</span></div>
+
+<? var innerHTML= createInnerHTML(); ?>  
+<select name="JOINT" id="JOINT" aria-label="JOINT" aria-required="true" 
+required="">
+<option value=""></option>
+<? innerHTML.forEach(function(option) { ?>
+<option value="<?= option.value ?>"><?= option.text ?></option>
+<? }); ?>
+</select>
+
+<input type="submit" value="Submit" name="submit" id="Submit">
+</form>
+
+<script>
+function myFunction() {
+alert("The form was submitted. Please press okay to reload the page");
+}
+</script>
+
+<script>
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwTGqZqLTAsOpSweMn0xgHP0sOJPsFg5ZShC1HqzVoDoNi5h5Y/exec'
+const form = document.forms['submit-to-google-sheet']
+form.addEventListener('submit', e => {
+e.preventDefault()
+fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+  .then(response => console.log('Success!', response))
+  .catch(error => console.error('Error!', error.message))
+})
+</script>
+
+</div>
+</body>
+</html>
